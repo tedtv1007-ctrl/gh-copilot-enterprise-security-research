@@ -24,7 +24,9 @@
 - [網路配置與授權合規 (Proxy & Licensing)](./proxy_and_licensing.md)
 - [數據保護原則 (Research Notes)](./research_notes.md)
 - [企業管理員策略設定 (Enterprise Policies)](./enterprise_policies.md)
+- [GitHub Enterprise 全域策略管理 (Global Policies)](./enterprise_global_policies.md)
 - [訂閱方案與定價指南 (Pricing Guide)](./pricing_guide.md)
+
 - [企業導入案例研究 (Case Studies)](./case_studies.md)
 
 
