@@ -23,4 +23,5 @@
 ## 📄 詳細研究文件
 - [網路配置與授權合規 (Proxy & Licensing)](./proxy_and_licensing.md)
 - [數據保護原則 (Research Notes)](./research_notes.md)
+- [企業管理員策略設定 (Enterprise Policies)](./enterprise_policies.md)
 
