@@ -1,9 +1,60 @@
 # 企業導入資安研究：網路配置與授權合規
 
 ## 🌐 網路代理配置 (Network Proxy Configuration)
-在企業環境中，Visual Studio 透過代理伺服器連線至 GitHub Copilot 時，需注意以下配置與限制：
 
-### 1. 支援的代理協議
+### 1. 企業網路整合架構圖 (Network Architecture)
+
+```mermaid
+graph TD
+    subgraph "企業內網 (Internal Network)"
+        Dev["開發者工作站 (Visual Studio)"]
+        CA["企業自定義 CA 證書"]
+    end
+
+    subgraph "網路邊界 (DMZ/Boundary)"
+        Proxy["企業 HTTP Proxy (支援 NTLM/Kerberos)"]
+        FW["防火牆 (Firewall)"]
+    end
+
+    subgraph "GitHub 雲端服務 (SaaS)"
+        GH_Auth["github.com (身分驗證)"]
+        GH_Copilot["api.githubcopilot.com (AI 服務)"]
+        GH_Proxy["copilot-proxy.githubusercontent.com (代碼代理)"]
+    end
+
+    Dev -->|1. 讀取系統證書| CA
+    Dev -->|2. HTTP CONNECT| Proxy
+    Proxy -->|3. 流量檢查與轉發| FW
+    FW -->|4. 開放 443 端口| GH_Auth
+    FW -->|4. 開放 443 端口| GH_Copilot
+    FW -->|4. 開放 443 端口| GH_Proxy
+```
+
+### 2. 代理伺服器連線循序圖 (Connection Sequence)
+
+```mermaid
+sequenceDiagram
+    participant VS as Visual Studio (Copilot Extension)
+    participant OS as 作業系統 (Win-CA)
+    participant Proxy as 企業 Proxy
+    participant GH as GitHub Copilot 服務
+
+    VS->>OS: 請求受信任的根憑證
+    OS-->>VS: 回傳企業 CA 證書
+    Note over VS: 載入證書以驗證 SSL 攔截流量
+    VS->>Proxy: 發送 HTTP CONNECT (至 api.githubcopilot.com)
+    alt 需要認證
+        Proxy-->>VS: 407 Proxy Authentication Required
+        VS->>Proxy: 提供 NTLM / Kerberos 憑據
+    end
+    Proxy->>GH: 建立 TLS 隧道
+    GH-->>VS: TLS 握手成功
+    VS->>GH: 傳送代碼片段 (Snippets)
+    GH-->>VS: 回傳 AI 建議
+```
+
+### 3. 支援的代理協議
+
 - **HTTP Proxy**：GitHub Copilot 支援標準 HTTP 代理。
 - **不支援 HTTPS Proxy**：若代理伺服器網址以 `https://` 開頭，目前 GitHub Copilot **不支援**。
 
@@ -30,7 +81,30 @@
 ## ⚖️ 授權合規檢查 (License & IP Compliance)
 導入 AI 輔助開發時，法律與智慧財產權合規是企業最關注的項目。
 
-### 1. 公共代碼過濾機制 (Public Code Filter)
+### 1. 公共代碼過濾循序圖 (Public Code Matching Flow)
+
+```mermaid
+sequenceDiagram
+    participant Dev as 開發者 (IDE)
+    participant Model as Copilot 模型 (LLM)
+    participant Filter as 公共代碼過濾器
+    participant Index as GitHub 公共代碼索引
+
+    Dev->>Model: 提供代碼上下文 (Snippets)
+    Model->>Model: 生成建議代碼 (Generated Code)
+    Model->>Filter: 傳送建議代碼進行檢查
+    Filter->>Index: 比對重複字元 (>150 chars)
+    alt 發現高度相似公共代碼
+        Index-->>Filter: 發現匹配 (Match Found)
+        Filter-->>Dev: 阻斷建議 (Suggestion Blocked)
+    else 無明顯匹配
+        Index-->>Filter: 無匹配 (No Match)
+        Filter-->>Dev: 顯示建議內容
+    end
+```
+
+### 2. 公共代碼過濾機制 (Public Code Filter)
+
 - **功能**：當 Copilot 產出的代碼片段與 GitHub 上的公共代碼有超過 150 個字元的重複時，系統會自動阻斷該建議。
 - **合規建議**：企業應在組織設定中強制將此項設定為 **Block**。
 
