@@ -19,3 +19,8 @@
 - [GitHub Copilot Trust Center](https://copilot.github.trust.page/)
 - [Microsoft Learn: 管理 Visual Studio 中的 Copilot 狀態](https://learn.microsoft.com/zh-tw/visualstudio/ide/visual-studio-github-copilot-install-and-states?view=visualstudio)
 - [Visual Studio 訂閱與定價](https://visualstudio.microsoft.com/zh-hant/vs/pricing/)
+
+## 📄 詳細研究文件
+- [網路配置與授權合規 (Proxy & Licensing)](./proxy_and_licensing.md)
+- [數據保護原則 (Research Notes)](./research_notes.md)
+
