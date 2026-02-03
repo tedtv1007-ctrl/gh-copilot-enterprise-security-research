@@ -25,5 +25,7 @@
 - [數據保護原則 (Research Notes)](./research_notes.md)
 - [企業管理員策略設定 (Enterprise Policies)](./enterprise_policies.md)
 - [訂閱方案與定價指南 (Pricing Guide)](./pricing_guide.md)
+- [企業導入案例研究 (Case Studies)](./case_studies.md)
+
 
 
