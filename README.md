@@ -28,6 +28,8 @@
 - [訂閱方案與定價指南 (Pricing Guide)](./pricing_guide.md)
 
 - [企業導入案例研究 (Case Studies)](./case_studies.md)
+- [台灣保險業 AI 導入討論研究 (Taiwan Insurance AI Discussion)](./taiwan_insurance_ai_discussion.md)
+
 
 
 
