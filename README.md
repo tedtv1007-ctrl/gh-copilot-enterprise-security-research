@@ -29,6 +29,7 @@
 
 - [企業導入案例研究 (Case Studies)](./case_studies.md)
 - [台灣保險業 AI 導入討論研究 (Taiwan Insurance AI Discussion)](./taiwan_insurance_ai_discussion.md)
+- [保險業資安自律規範合規研究 (Regulatory Compliance)](./taiwan_regulatory_compliance.md)
 
 
 
