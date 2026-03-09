@@ -17,9 +17,11 @@
 
 ## 📊 案例與運維
 - [企業導入案例研究 (Case Studies)](./case_studies.md)
-- [台灣保險業 AI 導入討論研究 (Taiwan Insurance AI Discussion)](./taiwan_insurance_ai_discussion.md)
+- [台灣保險業 AI 導入討論研究 (Taiwan Insurance AI Discussion)](./taiwan_regulatory_compliance.md)
 - [GitHub Audit Logs 備份指南 (Audit Logs)](./audit_log_backup_guide.md)
 - [訂閱方案與定價指南 (Pricing Guide)](./pricing_guide.md)
+- [Copilot Business vs. Enterprise 比較與混合授權建議](./copilot_business_vs_enterprise.md)
+- [內部導入申請草案 (Internal Proposal Draft)](./internal_proposal_draft.md)
 
 ## 🛠️ 腳本工具 (Scripts)
 - `scripts/pii_interceptor.py`: Visual Studio 本地 PII 攔截代理腳本 (Python/Mitmproxy)。
